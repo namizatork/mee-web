@@ -14,7 +14,7 @@
           width="48%"
           depressed
           outlined
-          @click="toggleModal"
+          @click.stop="toLogin"
         >
           ログイン
         </v-btn>
@@ -23,7 +23,7 @@
           width="48%"
           depressed
           class="white--text"
-          @click="toggleModal"
+          @click.stop="toRegister"
         >
           新規登録
         </v-btn>
@@ -50,13 +50,24 @@ export default defineComponent({
     const store = root.$store
 
     const toggleModal = () => {
-      console.log('aaa')
       toggleVisible(store)
+    }
+
+    const toLogin = () => {
+      toggleVisible(store)
+      root.$router.push('login')
+    }
+
+    const toRegister = () => {
+      toggleVisible(store)
+      root.$router.push('register')
     }
 
     return {
       store,
-      toggleModal
+      toggleModal,
+      toLogin,
+      toRegister
     }
   }
 })

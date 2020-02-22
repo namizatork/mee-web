@@ -1,10 +1,10 @@
 <template>
   <header>
-    <div class="header__content">
-      <div class="header__content__logo">
-        <img src="images/logo.svg">
+    <div class="content">
+      <div class="content__logo">
+        <Logo />
       </div>
-      <div class="header__search d-none d-sm-flex d-md-flex d-lg-flex">
+      <div class="search d-none d-sm-flex d-md-flex d-lg-flex">
         <v-text-field
           prepend-inner-icon="mdi-magnify"
           filled
@@ -13,19 +13,19 @@
           hide-details
           background-color="#D8F2F2"
         />
-        <div class="header__search__manipulate">
+        <div class="search__manipulate">
           <a href="#">
             <img src="images/manipulate.svg" alt="">
           </a>
         </div>
       </div>
-      <div class="header__content__icon">
+      <div class="content__icon">
         <a href="#" @click="toggleModal">
           <v-icon>mdi-account-outline</v-icon>
         </a>
       </div>
     </div>
-    <div class="header__search header__search__sm d-sm-none">
+    <div class="search search__sm d-sm-none">
       <v-text-field
         prepend-inner-icon="mdi-magnify"
         filled
@@ -34,7 +34,7 @@
         hide-details
         background-color="#D8F2F2"
       />
-      <div class="header__search__manipulate">
+      <div class="search__manipulate">
         <a href="#">
           <img src="images/manipulate.svg" alt="">
         </a>
@@ -45,12 +45,16 @@
 
 <script>
 import { defineComponent } from '@vue/composition-api'
+import Logo from '@/components/atoms/Logo.vue'
 
 const toggleVisible = async (store) => {
   await store.dispatch('guest_modal/toggleVisible')
 }
 
 export default defineComponent({
+  components: {
+    Logo
+  },
   setup (props, { root }) {
     const store = root.$store
 
@@ -69,16 +73,13 @@ export default defineComponent({
 header
     padding: 15px 15px 0 15px
     border-bottom: 1px solid #ddd
-.header__content
+.content
     display: flex
     align-items: center
     margin-bottom: 15px
-    .header__search
+    .search
         margin-left: 20px
-.header__content__logo
-    img
-        width: 9.7rem
-.header__content__icon
+.content__icon
     background-color: #C4C4C4
     padding: 5px
     border-radius: 20px
@@ -88,11 +89,11 @@ header
     justify-content: center
     align-items: center
     margin-left: auto
-.header__search
+.search
     display: flex
     align-items: center
-.header__search__manipulate
+.search__manipulate
     margin-left: 15px
-.header__search__sm
+.search__sm
     margin-bottom: 15px
 </style>

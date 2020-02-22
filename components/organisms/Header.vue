@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="header__content__icon">
-        <a href="#">
+        <a href="#" @click="toggleModal">
           <v-icon>mdi-account-outline</v-icon>
         </a>
       </div>
@@ -42,6 +42,28 @@
     </div>
   </header>
 </template>
+
+<script>
+import { defineComponent } from '@vue/composition-api'
+
+const toggleVisible = async (store) => {
+  await store.dispatch('guest_modal/toggleVisible')
+}
+
+export default defineComponent({
+  setup (props, { root }) {
+    const store = root.$store
+
+    const toggleModal = () => {
+      toggleVisible(store)
+    }
+
+    return {
+      toggleModal
+    }
+  }
+})
+</script>
 
 <style lang='sass' scoped>
 header

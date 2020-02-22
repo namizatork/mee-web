@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import { createComponent } from '@vue/composition-api'
+import { defineComponent } from '@vue/composition-api'
 import Header from '@/components/organisms/Header.vue'
 
-export default createComponent({
+export default defineComponent({
   components: {
     Header
   }

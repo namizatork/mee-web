@@ -1,12 +1,17 @@
 <template>
   <div>
-    <UserCard />
-    <UserCard />
-    <UserCard />
-    <UserCard />
-    <UserCard />
-    <UserCard />
-    <UserCard />
+    {{ $console(users.user_lists) }}
+    <div v-if="$isset(users.user_lists) && $isset(users.user_lists.data)">
+      <div v-for="user in users.user_lists.data" :key="user.id">
+        <UserCard :name="user.user_name" />
+      </div>
+    </div>
+    <div v-else>
+      <v-progress-circular
+        indeterminate
+        color="primary"
+      />
+    </div>
     <Modal v-show="store.getters['guest_modal/getVisible']" name="login_or_register" @from-child="toggleModal">
       <template slot="footer">
         <v-btn
@@ -33,9 +38,10 @@
 </template>
 
 <script>
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent, onMounted, ref } from '@vue/composition-api'
 import UserCard from '@/components/organisms/UserCard.vue'
 import Modal from '@/components/organisms/Modal.vue'
+import userRepository from '@/repositories/mee_api/userRepository.js'
 
 const toggleVisible = async (store) => {
   await store.dispatch('guest_modal/toggleVisible')
@@ -48,6 +54,7 @@ export default defineComponent({
   },
   setup (props, { root }) {
     const store = root.$store
+    const users = ref({})
 
     const toggleModal = () => {
       toggleVisible(store)
@@ -63,11 +70,16 @@ export default defineComponent({
       root.$router.push('register')
     }
 
+    onMounted(async () => {
+      users.value = (await userRepository.fetchUsers()).data
+    })
+
     return {
       store,
       toggleModal,
       toLogin,
-      toRegister
+      toRegister,
+      users
     }
   }
 })

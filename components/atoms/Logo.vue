@@ -1,6 +1,6 @@
 <template>
   <n-link to="/">
-    <img src="images/logo.svg" :style="{ width: logoWidth }">
+    <img src="~/static/images/logo.svg" :style="{ width: logoWidth }">
   </n-link>
 </template>
 

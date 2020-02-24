@@ -2,7 +2,7 @@
   <header>
     <div class="content">
       <div class="content__logo">
-        <Logo />
+        <Logo logo-width="9.7rem" />
       </div>
       <div class="search d-none d-sm-flex d-md-flex d-lg-flex">
         <v-text-field
@@ -15,7 +15,7 @@
         />
         <div class="search__manipulate">
           <a href="#">
-            <img src="images/manipulate.svg" alt="">
+            <img src="~/static/images/manipulate.svg" alt="">
           </a>
         </div>
       </div>
@@ -23,6 +23,23 @@
         <a href="#" @click="toggleModal">
           <v-icon>mdi-account-outline</v-icon>
         </a>
+      </div>
+      <div class="content__icon">
+        <template v-if="loggedIn">
+          <a href="#" @click="toggleModal">
+            <v-icon>mdi-account-outline</v-icon>
+          </a>
+        </template>
+        <template v-else>
+          <n-link to="/user/config">
+            <v-avatar size="38">
+              <img
+                src="~/static/images/saito.jpeg"
+                alt="John"
+              >
+            </v-avatar>
+          </n-link>
+        </template>
       </div>
     </div>
     <div class="search search__sm d-sm-none">
@@ -36,7 +53,7 @@
       />
       <div class="search__manipulate">
         <a href="#">
-          <img src="images/manipulate.svg" alt="">
+          <img src="~/static/images/manipulate.svg" alt="">
         </a>
       </div>
     </div>
@@ -44,7 +61,7 @@
 </template>
 
 <script>
-import { defineComponent } from '@vue/composition-api'
+import { defineComponent, ref } from '@vue/composition-api'
 import Logo from '@/components/atoms/Logo.vue'
 
 const toggleVisible = async (store) => {
@@ -57,13 +74,15 @@ export default defineComponent({
   },
   setup (props, { root }) {
     const store = root.$store
+    const loggedIn = ref(false)
 
     const toggleModal = () => {
       toggleVisible(store)
     }
 
     return {
-      toggleModal
+      toggleModal,
+      loggedIn
     }
   }
 })

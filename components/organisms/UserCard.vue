@@ -1,11 +1,11 @@
 <template>
   <div class="usercard">
     <div class="icon">
-      <img src="images/saito.jpeg" alt="Namizato">
+      <img src="~/static/images/saito.jpeg" alt="Namizato">
     </div>
     <div class="content">
       <div class="content__title">
-        Namizato
+        {{ name }}
       </div>
       <div class="content__config">
         11年 / 大阪府 / 男性
@@ -41,6 +41,23 @@
     </div>
   </div>
 </template>
+
+<script>
+import { defineComponent } from '@vue/composition-api'
+
+export default defineComponent({
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: String,
+      required: true
+    }
+  }
+})
+</script>
 
 <style lang="sass" scoped>
 .usercard

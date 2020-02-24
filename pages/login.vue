@@ -24,7 +24,6 @@
           outlined
           depressed
           hide-details
-          small
         />
 
         <v-btn
@@ -32,7 +31,6 @@
           color="#FF89D0"
           width="100%"
           class="white--text button"
-          small
         >
           ログイン
         </v-btn>

@@ -60,24 +60,20 @@
   </header>
 </template>
 
-<script>
-import { defineComponent, ref } from '@vue/composition-api'
+<script lang="ts">
+import { defineComponent, ref, SetupContext } from '@vue/composition-api'
 import Logo from '@/components/atoms/Logo.vue'
-
-const toggleVisible = async (store) => {
-  await store.dispatch('guest_modal/toggleVisible')
-}
 
 export default defineComponent({
   components: {
     Logo
   },
-  setup (props, { root }) {
-    const store = root.$store
+  setup (_, context: SetupContext) {
+    const store = context.root.$store
     const loggedIn = ref(false)
 
     const toggleModal = () => {
-      toggleVisible(store)
+      store.dispatch('guest_modal/toggleVisible')
     }
 
     return {

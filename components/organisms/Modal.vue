@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 
 export default defineComponent({
@@ -27,7 +27,7 @@ export default defineComponent({
       required: true
     }
   },
-  setup (props, { emit }) {
+  setup (_, { emit }) {
     const toggleModal = () => {
       emit('from-child')
     }

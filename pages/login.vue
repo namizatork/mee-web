@@ -42,7 +42,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 import Logo from '@/components/atoms/Logo.vue'
 

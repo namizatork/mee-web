@@ -1,6 +1,7 @@
+import { Configuration } from '@nuxt/types'
 import colors from 'vuetify/es5/util/colors'
 
-export default {
+const nuxtConfig: Configuration = {
   mode: 'spa',
   /*
   ** Headers of the page
@@ -30,13 +31,15 @@ export default {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/extention.js'
+    '@/plugins/composition-api',
+    '@/plugins/extention'
   ],
   /*
   ** Nuxt.js dev-modules
   */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
+    '@nuxt/typescript-build',
     '@nuxtjs/eslint-module',
     '@nuxtjs/vuetify'
   ],
@@ -62,32 +65,16 @@ export default {
   */
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-    theme: {
-      icons: {
-        iconfont: 'mdiSvg'
-      },
-      dark: false,
-      themes: {
-        dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
-    }
+    icons: {
+      iconfont: 'mdiSvg',
+      values: {}
+    },
   },
   /*
   ** Build configuration
   */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
-    extend (config, ctx) {
-    }
   }
 }
+
+module.exports = nuxtConfig

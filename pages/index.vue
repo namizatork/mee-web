@@ -12,7 +12,7 @@
         color="primary"
       />
     </div>
-    <Modal v-show="store.getters['guest_modal/getVisible']" name="login_or_register" @from-child="toggleModal">
+    <Modal name="login_or_register" @from-child="toggleModal">
       <template slot="footer">
         <v-btn
           color="#000"
@@ -37,13 +37,13 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, onMounted, ref } from '@vue/composition-api'
+<script lang="ts">
+import { defineComponent, onMounted, ref, SetupContext } from '@vue/composition-api'
 import UserCard from '@/components/organisms/UserCard.vue'
 import Modal from '@/components/organisms/Modal.vue'
 import userRepository from '@/repositories/mee_api/userRepository.js'
 
-const toggleVisible = async (store) => {
+const toggleVisible = async (store: any) => {
   await store.dispatch('guest_modal/toggleVisible')
 }
 
@@ -52,8 +52,8 @@ export default defineComponent({
     UserCard,
     Modal
   },
-  setup (props, { root }) {
-    const store = root.$store
+  setup (_, context: SetupContext) {
+    const store = context.root.$store
     const users = ref({})
 
     const toggleModal = () => {
@@ -62,12 +62,12 @@ export default defineComponent({
 
     const toLogin = () => {
       toggleVisible(store)
-      root.$router.push('login')
+      context.root.$router.push('login')
     }
 
     const toRegister = () => {
       toggleVisible(store)
-      root.$router.push('register')
+      context.root.$router.push('register')
     }
 
     onMounted(async () => {
